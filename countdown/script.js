@@ -1,25 +1,54 @@
-const currentDate = new Date();
-console.log(currentDate); // This logs the current date and time to the console
+let targetDate;
 
-const targetDate = new Date('2024-12-31T23:59:59'); // Replace with target
-console.log(targetDate); // Check the target date in the console
+function setTargetDate() {
+    const dateInput = document.getElementById('target-date').value;
+    const timeInput = document.getElementById('target-time').value;
 
-const difference = targetDate - currentDate;
-console.log(difference); // This will log the difference in milliseconds
+    if (dateInput && timeInput) {
+        targetDate = new Date(`${dateInput}T${timeInput}:00`);
+        console.log(targetDate); // Log the new target date to the console
+        updateCountdown(); // Immediately update the countdown
+    } else {
+        alert('Please enter both date and time.');
+    }
+}
 
 function updateCountdown() {
+    if (!targetDate) return;
+
     const currentTime = new Date();
     const difference = targetDate - currentTime;
-  
+
+    if (difference <= 0) {
+        clearInterval(interval);
+        document.getElementById("days").innerText = '0';
+        document.getElementById("hours").innerText = '0';
+        document.getElementById("minutes").innerText = '0';
+        document.getElementById("seconds").innerText = '0';
+        alert('Countdown complete!');
+        return;
+    }
+
     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
     const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-  
+
     document.getElementById("days").innerText = days;
     document.getElementById("hours").innerText = hours;
     document.getElementById("minutes").innerText = minutes;
     document.getElementById("seconds").innerText = seconds;
-  }
+}
 
-  const interval = setInterval(updateCountdown, 1000);
+function toggleOrientation() {
+    const countdown = document.getElementById('countdown');
+    if (countdown.classList.contains('horizontal')) {
+        countdown.classList.remove('horizontal');
+        countdown.classList.add('vertical');
+    } else {
+        countdown.classList.remove('vertical');
+        countdown.classList.add('horizontal');
+    }
+}
+
+const interval = setInterval(updateCountdown, 1000);
