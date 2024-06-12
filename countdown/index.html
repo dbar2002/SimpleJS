@@ -3,49 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown Timer</title>
-    <link rel="stylesheet" href="styles.css"/>
+    <title>Customizable Countdown Timer</title>
+    <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
-    <div class="input-container">
-        <div class="input-field">
-            <label for="zip-code">Zip Code:</label>
-            <input type="text" id="zip-code">
-            <button class="set-button" onclick="getTargetDate()">Get Time Zone</button>
+    <div class="container">
+        <div class="input-container">
+            <h1>Countdown Timer</h1>
+            <div class="input-field">
+                <label for="zip-code">Zip Code or City:</label>
+                <input type="text" id="zip-code">
+                <button class="set-button" onclick="getTargetDate()">Get Time Zone</button>
+            </div>
+            <div id="location-info">
+                <p><strong>City:</strong> <span id="city-name"></span></p>
+                <p><strong>Time Zone:</strong> <span id="time-zone"></span></p>
+            </div>
+            <div class="input-field">
+                <label for="target-date">Target Date:</label>
+                <input type="date" id="target-date">
+            </div>
+            <div class="input-field">
+                <label for="target-time">Target Time:</label>
+                <input type="time" id="target-time">
+            </div>
+            <button class="set-button" onclick="setTargetDate()">Set Target Date and Time</button>
+            <button class="toggle-orientation-button" onclick="toggleOrientation()">Toggle Orientation</button>
         </div>
-        <div class="input-field">
-            <label for="target-date">Target Date:</label>
-            <input type="date" id="target-date">
-        </div>
-        <div class="input-field">
-            <label for="target-time">Target Time:</label>
-            <input type="time" id="target-time">
-        </div>
-        <button class="set-button" onclick="setTargetDate()">Set Target Date and Time</button>
-        <button class="toggle-orientation-button" onclick="toggleOrientation()">Toggle Orientation</button>
-        <div id="location-info">
-            <p><strong>City:</strong> <span id="city-name"></span></p>
-            <p><strong>Time Zone:</strong> <span id="time-zone"></span></p>
+        <div class="display-container">
+            <div id="countdown" class="horizontal">
+                <div class="time-unit">
+                    <span id="days"></span>
+                    <span class="timer-unit">Days</span>
+                </div>
+                <div class="time-unit">
+                    <span id="hours"></span>
+                    <span class="timer-unit">Hours</span>
+                </div>
+                <div class="time-unit">
+                    <span id="minutes"></span>
+                    <span class="timer-unit">Minutes</span>
+                </div>
+                <div class="time-unit">
+                    <span id="seconds"></span>
+                    <span class="timer-unit">Seconds</span>
+                </div>
+            </div>
+            <div id="progress-bar-container">
+                <svg viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="90" fill="none" stroke="#ddd" stroke-width="10" />
+                    <circle id="progress-bar" cx="100" cy="100" r="90" fill="none" stroke="#ff8000" stroke-width="10" stroke-linecap="round" stroke-dasharray="565.48" stroke-dashoffset="0" transform="rotate(-90,100,100)" />
+                </svg>
+                <div id="progress-text"></div>
+            </div>
         </div>
     </div>
-    <div id="countdown" class="horizontal">
-        <div class="time-unit">
-            <span id="days"></span>
-            <span class="timer-unit">Days</span>
-        </div>
-        <div class="time-unit">
-            <span id="hours"></span>
-            <span class="timer-unit">Hours</span>
-        </div>
-        <div class="time-unit">
-            <span id="minutes"></span>
-            <span class="timer-unit">Minutes</span>
-        </div>
-        <div class="time-unit">
-            <span id="seconds"></span>
-            <span class="timer-unit">Seconds</span>
-        </div>
-    </div>
-    <script src="script.js"></script>
+    <script src="js/target-script.js"></script>
 </body>
 </html>
